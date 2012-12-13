@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'rubygems'
+require 'skybox'
+require 'commander/import'
+
+################################################################################
+# Initialization
+################################################################################
+
+# CLI Setup
+program :name, 'Skybox'
+program :version, Skybox::VERSION
+program :description, 'Sky-based Analytics Frontend.'
+default_command :server
+
+# Catch signals
+Signal.trap('TERM') { Process.kill('KILL', 0) }
+
+################################################################################
+# Commands
+################################################################################
+
+command :server do |c|
+  c.syntax = 'skybox server'
+  c.description = 'Runs the Skybox server.'
+  c.option '--port PORT', Integer, 'HTTP server port'
+  c.action do |args, options|
+    options.default :port => 10000
+    Skybox::App.run!(:port => options.port)
+  end
+end
+
