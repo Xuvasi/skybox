@@ -1,0 +1,11 @@
+#navbar {
+    margin-top: 20px;
+}
+
+.breadcrumb > li ul {
+    text-shadow: none;
+}
+
+.breadcrumb .icon-arrow-right {
+    margin:0px 12px;
+}

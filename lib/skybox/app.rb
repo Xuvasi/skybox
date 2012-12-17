@@ -11,26 +11,9 @@ class Skybox
 
     configure do
       enable :logging
-      set :paths, [
-        Dir.pwd,
-        Dir.home,
-        File.join(File.expand_path(File.dirname(__FILE__)), 'public')
-        ]
+      enable :static
+      set :public_folder, File.dirname(__FILE__) + '/static'
     end
-    
-
-    ############################################################################
-    #
-    # Attributes
-    #
-    ############################################################################
-
-    # A list of paths that Skybox searches through to find pages to render.
-    # By default this list will search within the present working directory
-    # first, then the ~/.skybox directory and then finally it will look within
-    # the gem.
-    attr_accessor :paths
-    
 
     ############################################################################
     #
@@ -38,20 +21,14 @@ class Skybox
     #
     ############################################################################
 
-    # The default route attempts to load the html page located within the
-    # list of paths configured on the application.
-    get '/:name' do
-      settings.paths.each do |path|
-        filename = "#{path}/#{params[:name]}.html"
-        next unless File.exists?(filename)
+    # Renders the home page.
+    get '/' do
+      erb :index
+    end
 
-        # Render the page.
-        return send_file filename
-      end
-      
-      # If it's not found then show a 404.
-      #status 404
-      return 'Not found'
+    # Renders a built-in view.
+    get '/:name' do
+      erb params[:name]
     end
   end
 end
