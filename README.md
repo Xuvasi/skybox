@@ -20,7 +20,7 @@ To install Skybox, simply install the gem and run the server:
 Skybox assumes you're running Sky locally.
 To point to a different server simply use the `--sky=[HOST]:[PORT]` argument:
 
-    $ skybox --sky 10.0.1.1             # Assumes default port 9292
+    $ skybox --sky 10.0.1.1             # Assumes default port 8585
     $ skybox --sky 10.0.1.1:5000
 
 You can also specify the port you'd like Skybox to run on by using the `--port` or `-p` argument:

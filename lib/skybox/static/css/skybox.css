@@ -9,3 +9,26 @@
 .breadcrumb .icon-arrow-right {
     margin:0px 12px;
 }
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+/**
+ * Maps
+ */
+.map {
+  background:#f2f2f2;
+  border: 1px solid black;
+}
+
+.region {
+  fill:#fff;
+  stroke:#333;
+}
+

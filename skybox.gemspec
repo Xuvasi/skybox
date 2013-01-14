@@ -15,12 +15,14 @@ Gem::Specification.new do |s|
   s.summary     = 'Sky-based Analytics Frontend'
 
   s.add_dependency('sinatra', '~> 1.3.3')
+  s.add_dependency('thin', '~> 1.5.0')
   s.add_dependency('commander', '~> 4.1.2')
 
   s.add_development_dependency('rake', '~> 10.0.3')
   s.add_development_dependency('minitest', '~> 4.3.3')
   s.add_development_dependency('mocha', '~> 0.13.1')
-  s.add_development_dependency('rerun', '~> 0.7.2')
+  s.add_development_dependency('rerun', '~> 0.7.1')
+  s.add_development_dependency('rb-fsevent', '~> 0.9.1')
 
   s.test_files   = Dir.glob('spec/**/*')
   s.files        = Dir.glob('lib/**/*') + %w(README.md CHANGELOG)

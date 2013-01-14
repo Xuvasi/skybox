@@ -28,7 +28,7 @@ class Skybox
 
     # Renders a built-in view.
     get '/:name' do
-      erb params[:name]
+      erb params[:name].to_sym
     end
   end
 end
