@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('mocha', '~> 0.13.1')
   s.add_development_dependency('rerun', '~> 0.7.1')
   s.add_development_dependency('rb-fsevent', '~> 0.9.1')
+  s.add_development_dependency('rack-test', '~> 0.6.2')
 
   s.test_files   = Dir.glob('spec/**/*')
   s.files        = Dir.glob('lib/**/*') + %w(README.md CHANGELOG)

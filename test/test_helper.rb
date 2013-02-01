@@ -1,0 +1,6 @@
+require 'bundler/setup'
+require 'minitest/autorun'
+require 'mocha'
+require 'unindentable'
+require 'rack/test'
+require 'skybox'

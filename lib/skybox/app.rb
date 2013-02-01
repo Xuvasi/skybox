@@ -55,41 +55,33 @@ class Skybox
 
     # Converts a JSON document to a Sky query, executes it and returns the
     # results.
-    get '/query' do
-      action_id = params[:actionId].to_i
+    post '/query' do
+      params = JSON.parse(request.env["rack.input"].read)
+      
+      # Set the table name.
+      SkyDB.table_name = params['table']
+      
+      # Parse the query and return an error if it doesn't parse correctly.
+      query = SkyDB.query.from_hash(params['query'])
+      halt 422, params.inspect if query.nil?
 
-      result = SkyDB.aggregate(
-        <<-BLOCK.unindent
-          function aggregate(cursor, data)
-            if data.actions == nil then data.actions = {} end
-            last_action_timestamps = {}
-            event = cursor:event()
-          
-            -- Loop over each event in the path.
-            while cursor:next() do
-              if data.actions[event.action_id] == nil then
-                data.actions[event.action_id] = {total_count=0, count=0, time=0}
-              end
-
-              -- Loop over each last action to determine the time it occurred.
-              if event.action_id == #{action_id} then
-                for k,v in ipairs(last_action_timestamps) do
-                  data.actions[k].count = data.actions[k].count + 1
-                  data.actions[k].time = data.actions[k].time + (event.timestamp - data.actions[k].time)
-                end
-              end
-              
-              -- Save the last occurrance of this action.
-              last_action_timestamps[event.action_id] = event.timestamp
-              data.actions[event.action_id].total_count = data.actions[event.action_id].total_count + 1
-            end
-          end
-        BLOCK
-      )
-  
       # Convert the result to JSON and return it.
       content_type :json
-      return result.to_json
+      results = query.execute
+      return "#{results.to_json}\n"
+    end
+
+    # Generates the Lua code used by a given query.
+    post '/query/code' do
+      params = JSON.parse(request.env["rack.input"].read)
+      
+      # Parse the query and return an error if it doesn't parse correctly.
+      query = SkyDB.query.from_hash(params['query'])
+      halt 422 if query.nil?
+
+      # Convert the result to JSON and return it.
+      content_type :text
+      return "#{query.codegen()}\n"
     end
 
 
