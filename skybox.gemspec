@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.add_dependency('sinatra', '~> 1.3.3')
   s.add_dependency('thin', '~> 1.5.0')
   s.add_dependency('commander', '~> 4.1.2')
+  s.add_dependency('skydb', '~> 0.2.1')
+  s.add_dependency('unindentable', '~> 0.1.0')
 
   s.add_development_dependency('rake', '~> 10.0.3')
   s.add_development_dependency('minitest', '~> 4.3.3')

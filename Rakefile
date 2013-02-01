@@ -1,4 +1,4 @@
 desc "run skybox (via rerun)"
 task :rerun do
-  sh "rerun --clear --pattern '**/*.{rb,erb}' -- bin/skybox"
+  sh "rerun --clear --pattern '**/*.{rb,erb}' -- bin/skybox server --database chicago"
 end

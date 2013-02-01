@@ -3,6 +3,7 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 
 require 'rubygems'
 require 'skybox'
+require 'skydb'
 require 'commander/import'
 
 ################################################################################
@@ -18,6 +19,7 @@ default_command :server
 # Catch signals
 Signal.trap('TERM') { Process.kill('KILL', 0) }
 
+
 ################################################################################
 # Commands
 ################################################################################
@@ -26,8 +28,10 @@ command :server do |c|
   c.syntax = 'skybox server'
   c.description = 'Runs the Skybox server.'
   c.option '--port PORT', Integer, 'HTTP server port'
+  c.option '--database STRING', 'The name of the database to connect to'
   c.action do |args, options|
     options.default :port => 10000
+    SkyDB.table_name = options.database
     Skybox::App.run!(:port => options.port)
   end
 end
