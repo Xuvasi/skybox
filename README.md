@@ -45,6 +45,21 @@ You'll need to override the `site.yml` which contains the navigation structure f
 You can run `skybox generate site` in your project to write a default `site.yml` file to your project.
 
 
+### Testing
+
+You can use cURL to test queries against the server like this:
+
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"table":"gharchive","query":{"selections":[{"fields":[{"aggregationType":"count"}]}]}}' http://localhost:10000/query
+```
+
+Or you can see the generated code from a query by using the `/query/code` endpoint:
+
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"table":"gharchive","query":{"selections":[{"fields":[{"aggregationType":"count"}]}]}}' http://localhost:10000/query/code
+```
+
+
 ### Contributing
 
 Have a cool feature you want to see added?
