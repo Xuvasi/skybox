@@ -17,6 +17,7 @@ class Skybox
       set :public_folder, File.dirname(__FILE__) + '/static'
     end
 
+
     ############################################################################
     #
     # Routes
@@ -90,14 +91,19 @@ class Skybox
     # Views
     ####################################
 
-    # Renders the home page.
     get '/' do
+      @tables = SkyDB.get_tables()
       erb :index
     end
 
-    # Renders a built-in view.
-    get '/:name' do
-      erb params[:name].to_sym
+    get '/:table_name' do
+      redirect "/#{params[:table_name]}/explore"
+    end
+
+    get '/:table_name/:action' do
+      @table_name = params[:table_name]
+      @action = params[:action]
+      erb :explore
     end
   end
 end

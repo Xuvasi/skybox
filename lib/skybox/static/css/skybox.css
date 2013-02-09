@@ -1,34 +1,13 @@
-#navbar {
+.navbar {
     margin-top: 20px;
 }
 
-.breadcrumb > li ul {
-    text-shadow: none;
-}
-
-.breadcrumb .icon-arrow-right {
-    margin:0px 12px;
-}
-
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
+.node {
   shape-rendering: crispEdges;
 }
 
-
-/**
- * Maps
- */
-.map {
-  background:#f2f2f2;
-  border: 1px solid black;
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-opacity: 0.2;
 }
-
-.region {
-  fill:#fff;
-  stroke:#333;
-}
-
