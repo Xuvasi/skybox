@@ -40,10 +40,8 @@
           <div class="navbar-inner">
             <a class="brand" href="#"><%= @table_name.nil? ? 'Skybox' : @table_name %></a>
             <ul class="nav">
-              <li class="active"><a href="#">Explore</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <li><a href="#">Admin</a></li>
+              <li class="<%= @action == 'explore' ? 'active' : '' %>"><a href="explore">Explore</a></li>
+              <li class="<%= @action == 'admin' ? 'active' : '' %>"><a href="admin">Admin</a></li>
             </ul>
           </div>
         </div>
