@@ -31,7 +31,6 @@ command :server do |c|
   c.option '--database STRING', 'The name of the database to connect to'
   c.action do |args, options|
     options.default :port => 10000
-    SkyDB.table_name = options.database
     Skybox::App.run!(:port => options.port)
   end
 end

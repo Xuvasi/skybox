@@ -37,6 +37,7 @@ class Skybox
 
     # Retrieves a list of all actions.
     get '/actions' do
+      SkyDB.table_name = params['table']
       @actions = SkyDB.get_actions()
       content_type 'application/json'
       JSON.dump(@actions)
@@ -44,6 +45,7 @@ class Skybox
 
     # Retrieves a list of all properties.
     get '/properties' do
+      SkyDB.table_name = params['table']
       @properties = SkyDB.get_properties()
       content_type 'application/json'
       JSON.dump(@properties)
@@ -96,12 +98,12 @@ class Skybox
       erb :index
     end
 
-    get '/:table_name' do
-      redirect "/#{params[:table_name]}/explore"
+    get '/:table' do
+      redirect "/#{params[:table]}/explore"
     end
 
-    get '/:table_name/:action' do
-      @table_name = params[:table_name]
+    get '/:table/:action' do
+      @table = params[:table]
       @action = params[:action]
       erb :explore
     end
