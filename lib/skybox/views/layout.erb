@@ -38,7 +38,7 @@
       <% if request.path != '/' %>
         <div class="navbar">
           <div class="navbar-inner">
-            <a class="brand" href="#"><%= @table.nil? ? 'Skybox' : @table %></a>
+            <a class="brand" href="/"><%= @table.nil? ? 'Skybox' : @table %></a>
             <ul class="nav">
               <li class="<%= @action == 'explore' ? 'active' : '' %>"><a href="explore">Explore</a></li>
               <li class="<%= @action == 'admin' ? 'active' : '' %>"><a href="admin">Admin</a></li>
