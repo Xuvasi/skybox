@@ -3,7 +3,7 @@
   overflow: hidden;
 }
 
-#chart .node rect {
+#chart .node {
   shape-rendering: crispEdges;
   cursor: pointer;
 }
