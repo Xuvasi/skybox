@@ -5,7 +5,7 @@
 
 #chart .node rect {
   shape-rendering: crispEdges;
-  cursor: hand;
+  cursor: pointer;
 }
 
 #chart .node .title {
@@ -18,3 +18,23 @@
   stroke: #F4F4F4;
   stroke-opacity: 1;
 }
+
+#query-text .selection,
+#query-text .condition {
+  cursor:pointer;
+  border-bottom:1px white;
+}
+
+#query-text .selection:hover {
+  background: rgba(255,255,0,0.2);
+  border-bottom:1px #999 dotted;
+}
+
+#query-text .condition:hover {
+  background: rgba(255,255,0,0.2);
+  border-bottom:1px #999 dotted;
+}
+
+.selection-popover {
+}
+
