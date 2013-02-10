@@ -2,3 +2,19 @@
   border:1px solid #ccc;
   overflow: hidden;
 }
+
+#chart .node rect {
+  shape-rendering: crispEdges;
+  cursor: hand;
+}
+
+#chart .node .title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+}
+
+#chart .link {
+  fill: none;
+  stroke: #F4F4F4;
+  stroke-opacity: 1;
+}
