@@ -107,5 +107,12 @@ class Skybox
       @action = params[:action]
       erb :explore
     end
+
+    get '/:table/admin/actions' do
+      SkyDB.table_name = params[:table]
+      @table = params[:table]
+      @actions = SkyDB.get_actions()
+      erb :'admin/actions/index'
+    end
   end
 end

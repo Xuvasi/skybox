@@ -28,7 +28,6 @@ command :server do |c|
   c.syntax = 'skybox server'
   c.description = 'Runs the Skybox server.'
   c.option '--port PORT', Integer, 'HTTP server port'
-  c.option '--database STRING', 'The name of the database to connect to'
   c.action do |args, options|
     options.default :port => 10000
     Skybox::App.run!(:port => options.port)
