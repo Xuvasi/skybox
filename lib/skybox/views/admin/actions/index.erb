@@ -1,15 +1,13 @@
 <div class="content row">
   <div class="span12">
     <h3>Manage Actions</h3>
-  </div>
-</div>
-    
-<div class="content row">
-  <div class="span12">
-    <table class="table-striped table-bordered span6">
-      <tr>
-        <th>Name</td>
-      </tr>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</td>
+        </tr>
+      </thead>
 
       <tbody>
         <% @actions.sort{|a,b| a['name'] <=> b['name']}.each do |action| %>

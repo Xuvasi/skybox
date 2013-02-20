@@ -108,11 +108,35 @@ class Skybox
       erb :explore
     end
 
+
+    ####################################
+    # Action Views
+    ####################################
+    
     get '/:table/admin/actions' do
       SkyDB.table_name = params[:table]
       @table = params[:table]
       @actions = SkyDB.get_actions()
       erb :'admin/actions/index'
+    end
+
+
+    ####################################
+    # Property Views
+    ####################################
+
+    get '/:table/admin/properties' do
+      SkyDB.table_name = params[:table]
+      @table = params[:table]
+      @properties = SkyDB.get_properties()
+      erb :'admin/properties/index'
+    end
+
+    get '/:table/admin/properties/:id/edit' do
+      SkyDB.table_name = params[:table]
+      @table = params[:table]
+      @property = SkyDB.get_property(params[:id])
+      erb :'admin/properties/edit'
     end
   end
 end
