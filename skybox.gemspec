@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.email       = ['benbjohnson@yahoo.com']
   s.homepage    = 'http://github.com/skydb/skybox'
   s.summary     = 'Sky-based Analytics Frontend'
+  s.executables = ['skybox']
 
   s.add_dependency('sinatra', '~> 1.3.3')
   s.add_dependency('thin', '~> 1.5.0')
