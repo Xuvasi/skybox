@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency('sinatra', '~> 1.3.3')
   s.add_dependency('thin', '~> 1.5.0')
   s.add_dependency('commander', '~> 4.1.2')
-  s.add_dependency('skydb', '~> 0.2.1')
+  s.add_dependency('skydb', '~> 0.2.3')
   s.add_dependency('unindentable', '~> 0.1.0')
 
   s.add_development_dependency('rake', '~> 10.0.3')
@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rack-test', '~> 0.6.2')
 
   s.test_files   = Dir.glob('spec/**/*')
-  s.files        = Dir.glob('lib/**/*') + %w(README.md CHANGELOG)
+  s.files        = Dir.glob('lib/**/*') + %w(README.md)
   s.require_path = 'lib'
 end
