@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Ben Johnson']
   s.email       = ['benbjohnson@yahoo.com']
-  s.homepage    = 'http://github.com/skydb/skybox.rb'
+  s.homepage    = 'http://github.com/skydb/skybox'
   s.summary     = 'Sky-based Analytics Frontend'
 
   s.add_dependency('sinatra', '~> 1.3.3')
