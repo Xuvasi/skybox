@@ -1,7 +1,7 @@
 require 'rubygems/package_task'
 
 $:.unshift File.join(File.dirname(__FILE__), 'lib')
-require 'skydb/version'
+require 'skybox/version'
 
 
 ################################################################################
