@@ -1,9 +1,12 @@
-<div class="content row">
-  <div class="span12">
-    <p id="query-text" class="lead"></p>
-  </div>
-</div>
+<link href="/css/skybox.explore.css" rel="stylesheet">
+<script src="/js/skybox.explore.js"></script>
 
 <div class="content row">
   <div id="chart" class="span12"></div>
 </div>
+
+<script>
+skybox.ready(function() {
+  skybox.explore.init();
+});
+</script>

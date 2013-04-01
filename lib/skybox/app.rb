@@ -3,7 +3,7 @@ require 'json'
 require 'unindentable'
 
 class Skybox
-  # The Skybox App class represents the Sinatra that can be run.
+  # The Skybox App class represents the Sinatra app that can be run.
   class App < Sinatra::Base
     ############################################################################
     #
@@ -25,68 +25,29 @@ class Skybox
     ############################################################################
 
     ####################################
-    # System-level
+    # API
     ####################################
 
-    # Retrieves a list of all actions.
-    get '/tables' do
-      @tables = SkyDB.get_tables()
-      content_type 'application/json'
-      JSON.dump(@tables)
-    end
-
-    # Retrieves a list of all actions.
-    get '/actions' do
-      SkyDB.table_name = params['table']
-      @actions = SkyDB.get_actions()
-      content_type 'application/json'
-      JSON.dump(@actions)
-    end
-
-    # Retrieves a list of all properties.
-    get '/properties' do
-      SkyDB.table_name = params['table']
-      @properties = SkyDB.get_properties()
-      content_type 'application/json'
-      JSON.dump(@properties)
-    end
-
-
-    ####################################
-    # Analytics
-    ####################################
-
-    # Converts a JSON document to a Sky query, executes it and returns the
-    # results.
-    post '/query' do
-      params = JSON.parse(request.env["rack.input"].read)
-      
-      # Set the table name.
-      SkyDB.table_name = params['table']
-      
-      # Parse the query and return an error if it doesn't parse correctly.
-      query = SkyDB.query.from_hash(params['query'])
-      halt 422, params.inspect if query.nil?
-
-      # Convert the result to JSON and return it.
+    # Retrieves a list of all properties on a table.
+    get '/api/:table_name/properties' do
+      table = SkyDB::Table.new(:name => params[:table_name], :client => settings.client)
+      properties = table.get_properties()
       content_type :json
-      results = query.execute
+      return "#{properties.to_json}\n"
+    end
+
+    # Executes a query for a given table on the Sky server.
+    post '/api/:table_name/query' do
+      # Read the query from the POST body.
+      q = JSON.parse(request.env["rack.input"].read)
+      halt 422 if q.nil?
+
+      # Execute the query on the Sky server and return the results.
+      warn(params)
+      results = settings.client.query(SkyDB::Table.new(:name => params[:table_name]), q)
+      content_type :json
       return "#{results.to_json}\n"
     end
-
-    # Generates the Lua code used by a given query.
-    post '/query/code' do
-      params = JSON.parse(request.env["rack.input"].read)
-      
-      # Parse the query and return an error if it doesn't parse correctly.
-      query = SkyDB.query.from_hash(params['query'])
-      halt 422 if query.nil?
-
-      # Convert the result to JSON and return it.
-      content_type :text
-      return "#{query.codegen()}\n"
-    end
-
 
 
     ####################################
@@ -94,49 +55,17 @@ class Skybox
     ####################################
 
     get '/' do
-      @tables = SkyDB.get_tables()
+      @tables = settings.client.get_tables()
       erb :index
     end
 
-    get '/:table' do
-      redirect "/#{params[:table]}/explore"
+    get '/:table_name' do
+      redirect "/#{params[:table_name]}/explore"
     end
 
-    get '/:table/:action' do
-      @table = params[:table]
-      @action = params[:action]
+    get '/:table_name/explore' do
+      @table_name = params[:table_name]
       erb :explore
-    end
-
-
-    ####################################
-    # Action Views
-    ####################################
-    
-    get '/:table/admin/actions' do
-      SkyDB.table_name = params[:table]
-      @table = params[:table]
-      @actions = SkyDB.get_actions()
-      erb :'admin/actions/index'
-    end
-
-
-    ####################################
-    # Property Views
-    ####################################
-
-    get '/:table/admin/properties' do
-      SkyDB.table_name = params[:table]
-      @table = params[:table]
-      @properties = SkyDB.get_properties()
-      erb :'admin/properties/index'
-    end
-
-    get '/:table/admin/properties/:id/edit' do
-      SkyDB.table_name = params[:table]
-      @table = params[:table]
-      @property = SkyDB.get_property(params[:id])
-      erb :'admin/properties/edit'
     end
   end
 end

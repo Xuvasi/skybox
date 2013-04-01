@@ -7,7 +7,9 @@ require 'skydb'
 require 'commander/import'
 
 ################################################################################
+#
 # Initialization
+#
 ################################################################################
 
 # CLI Setup
@@ -21,16 +23,26 @@ Signal.trap('TERM') { Process.kill('KILL', 0) }
 
 
 ################################################################################
+#
 # Commands
+#
 ################################################################################
 
 command :server do |c|
   c.syntax = 'skybox server'
   c.description = 'Runs the Skybox server.'
-  c.option '--port PORT', Integer, 'HTTP server port'
+  c.option '--sky-host HOST', String, 'The host that Sky is running on.'
+  c.option '--sky-port PORT', Integer, 'The port that Sky is running on.'
+  c.option '--port PORT', Integer, 'HTTP server port.'
+
   c.action do |args, options|
     options.default :port => 10000
-    Skybox::App.run!(:port => options.port)
+    
+    client = SkyDB::Client.new(:host => options.sky_host, :port => options.sky_port)
+    Skybox::App.run!(
+      :port => options.port,
+      :client => client
+    )
   end
 end
 

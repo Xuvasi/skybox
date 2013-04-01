@@ -10,22 +10,16 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/skybox.css" rel="stylesheet">
-    <% if File.exists?("#{settings.public_folder}/css/skybox.#{@action}.css") %>
-      <link href="/css/skybox.<%= @action %>.css" rel="stylesheet">
-    <% end %>
 
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/humanize.js"></script>
     <script src="/js/d3.v3.js"></script>
     <script src="/js/d3.flow.js"></script>
-    <script src="/js/humanize.js"></script>
     <script src="/js/skybox.js"></script>
-    <% if File.exists?("#{settings.public_folder}/css/skybox.#{@action}.css") %>
-      <script src="/js/skybox.<%= @action %>.js"></script>
-    <% end %>
 
     <script>
-      skybox.table(<%= @table.to_json %>);
+      skybox.table(<%= @table_name.to_json %>);
     </script>
 
     <!--[if lt IE 9]>
@@ -38,17 +32,9 @@
       <% if request.path != '/' %>
         <div class="navbar">
           <div class="navbar-inner">
-            <a class="brand" href="/"><%= @table.nil? ? 'Skybox' : @table %></a>
+            <a class="brand" href="/"><%= @table_name.nil? ? 'Skybox' : @table_name %></a>
             <ul class="nav">
-              <li class="<%= @action == 'explore' ? 'active' : '' %>"><a href="/<%=@table%>/explore">Explore</a></li>
-              <li class="dropdown">
-                <a href="#" role="button" class="dropdown-toggle <%= request.path.index(/[^\/]+\/admin/i).nil? ? '' : 'active' %>" data-toggle="dropdown">Admin <b class="caret"></b></a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="/<%= @table %>/admin/actions">Manage Actions</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="/<%= @table %>/admin/properties">Manage Properties</a></li>
-                </ul>
-              </li>
-
+              <li class="<%= @action == 'explore' ? 'active' : '' %>"><a href="/<%=@table_name%>/explore">Explore</a></li>
             </ul>
             
             <div class="pull-right"><img class="loading" src="/img/loading.gif"/></div>
