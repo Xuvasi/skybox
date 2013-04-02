@@ -39,7 +39,7 @@ class Skybox
     # Executes a query for a given table on the Sky server.
     post '/api/:table_name/query' do
       # Read the query from the POST body.
-      q = JSON.parse(request.env["rack.input"].read)
+      q = JSON.parse(request.env["rack.input"].read, :max_nesting => 200)
       halt 422 if q.nil?
 
       # Execute the query on the Sky server and return the results.
