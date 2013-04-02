@@ -34,10 +34,12 @@ command :server do |c|
   c.option '--sky-host HOST', String, 'The host that Sky is running on.'
   c.option '--sky-port PORT', Integer, 'The port that Sky is running on.'
   c.option '--port PORT', Integer, 'HTTP server port.'
+  c.option '--daemonize', 'Daemonize the process.'
 
   c.action do |args, options|
     options.default :port => 10000
     
+    Process.daemon if options.daemonize
     client = SkyDB::Client.new(:host => options.sky_host, :port => options.sky_port)
     Skybox::App.run!(
       :port => options.port,
