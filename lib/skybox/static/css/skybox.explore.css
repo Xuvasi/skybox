@@ -15,7 +15,7 @@
 
 #chart .link {
   fill: none;
-  stroke: #F0F0F0;
+  stroke: #ddd;
   stroke-opacity: 1;
 }
 
@@ -36,5 +36,15 @@
 }
 
 .selection-popover {
+}
+
+.node-popover {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.node-popover .popover-content {
+  padding: 0;
 }
 
